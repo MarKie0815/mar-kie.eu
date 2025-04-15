@@ -1,0 +1,95 @@
+---
+interface Props {
+  post: {
+    slug: string;
+    title: string;
+    date: string;
+    image: string;
+    excerpt: string;
+  };
+}
+
+const { post } = Astro.props;
+---
+
+<article class="blog-preview-card">
+  <a href={`/blog/${post.slug}`} class="blog-preview-image-link">
+    <div class="blog-preview-image" style={`background-image: url('${post.image}')`}></div>
+  </a>
+  <div class="blog-preview-content">
+    <p class="blog-preview-date">{post.date}</p>
+    <h3 class="blog-preview-title">
+      <a href={`/blog/${post.slug}`}>{post.title}</a>
+    </h3>
+    <p class="blog-preview-excerpt">{post.excerpt}</p>
+    <a href={`/blog/${post.slug}`} class="text-link">Read more →</a>
+  </div>
+</article>
+
+<style>
+  .blog-preview-card {
+    background-color: var(--color-background);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .blog-preview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .blog-preview-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease;
+  }
+
+  .blog-preview-card:hover .blog-preview-image {
+    transform: scale(1.05);
+  }
+
+  .blog-preview-content {
+    padding: var(--spacing-sm);
+  }
+
+  .blog-preview-date {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .blog-preview-title {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .blog-preview-title a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .blog-preview-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .blog-preview-excerpt {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.5;
+  }
+
+  .text-link {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .text-link:hover {
+    color: var(--color-secondary);
+  }
+</style>

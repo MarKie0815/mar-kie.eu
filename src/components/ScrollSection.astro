@@ -1,0 +1,58 @@
+---
+interface Props {
+  id: string;
+  class?: string;
+}
+
+const { id, class: className = '' } = Astro.props;
+---
+
+<section id={id} class={`scroll-section content-section ${className}`}>
+  <div class="container">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .scroll-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(50px);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Initialize scroll animations
+  document.addEventListener('DOMContentLoaded', () => {
+    // Animate sections as they come into view
+    const sections = document.querySelectorAll('.scroll-section');
+    
+    sections.forEach(section => {
+      gsap.fromTo(
+        section,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+  });
+</script>

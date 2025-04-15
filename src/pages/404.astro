@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page Not Found | Mar-Kie">
+  <div class="error-container content-section">
+    <div class="container glass-panel">
+      <h1 class="error-title">404</h1>
+      <h2 class="error-subtitle">Page Not Found</h2>
+      <p class="error-text">The page you are looking for doesn't exist or has been moved.</p>
+      <div class="error-actions">
+        <a href="/" class="button primary">Go Home</a>
+        <a href="/blog" class="button secondary">Browse Blog</a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .error-container {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .error-container .container {
+    padding: var(--spacing-lg);
+  }
+
+  .error-title {
+    font-size: 8rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    line-height: 1;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .error-subtitle {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
+    color: white;
+  }
+
+  .error-text {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .error-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .button.primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .button.primary:hover {
+    background-color: #2a75e8;
+    transform: translateY(-2px);
+  }
+
+  .button.secondary {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .button.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .error-title {
+      font-size: 6rem;
+    }
+
+    .error-subtitle {
+      font-size: 1.5rem;
+    }
+
+    .error-actions {
+      flex-direction: column;
+    }
+  }
+</style>

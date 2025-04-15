@@ -1,0 +1,22 @@
+{
+  "name": "@example/basics",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^0.9.493",
+    "astro": "^4.15.11",
+    "gsap": "^3.12.7",
+    "intersection-observer": "^0.12.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

@@ -1,0 +1,176 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// In a real implementation, you would fetch blog posts from your content collection
+// For now, we'll use dummy data
+const posts = [
+  {
+    slug: 'getting-started-with-astro',
+    title: 'Getting Started with Astro',
+    date: 'June 15, 2023',
+    image: 'https://via.placeholder.com/800x450',
+    excerpt: 'Learn how we migrated from WordPress to Astro for better performance and developer experience.'
+  },
+  {
+    slug: 'modern-web-development',
+    title: 'Modern Web Development Techniques',
+    date: 'May 28, 2023',
+    image: 'https://via.placeholder.com/800x450',
+    excerpt: 'Explore the latest techniques and best practices in modern web development.'
+  },
+  {
+    slug: 'future-of-content-management',
+    title: 'The Future of Content Management',
+    date: 'April 10, 2023',
+    image: 'https://via.placeholder.com/800x450',
+    excerpt: 'How headless CMS and static site generators are changing the landscape of content management.'
+  },
+  {
+    slug: 'optimizing-website-performance',
+    title: 'Optimizing Website Performance',
+    date: 'March 22, 2023',
+    image: 'https://via.placeholder.com/800x450',
+    excerpt: 'Tips and tricks to improve your website\'s loading speed and overall performance.'
+  },
+  {
+    slug: 'responsive-design-best-practices',
+    title: 'Responsive Design Best Practices',
+    date: 'February 15, 2023',
+    image: 'https://via.placeholder.com/800x450',
+    excerpt: 'How to create websites that look great on all devices, from mobile phones to desktop computers.'
+  },
+  {
+    slug: 'accessibility-on-the-web',
+    title: 'Accessibility on the Web',
+    date: 'January 30, 2023',
+    image: 'https://via.placeholder.com/800x450',
+    excerpt: 'Making your website accessible to everyone, including people with disabilities.'
+  }
+];
+---
+
+<Layout title="Mar-Kie | Blog" description="Read our latest articles and insights">
+  <section class="blog-header content-section">
+    <div class="container glass-panel">
+      <h1 class="section-title">Our Blog</h1>
+      <p class="section-subtitle">Read our latest articles and insights</p>
+    </div>
+  </section>
+
+  <section class="blog-content content-section">
+    <div class="container glass-panel">
+      <div class="blog-grid">
+        {posts.map(post => (
+          <article class="blog-card">
+            <a href={`/blog/${post.slug}`} class="blog-card-image-link">
+              <div class="blog-card-image" style={`background-image: url('${post.image}')`}></div>
+            </a>
+            <div class="blog-card-content">
+              <p class="blog-card-date">{post.date}</p>
+              <h2 class="blog-card-title">
+                <a href={`/blog/${post.slug}`}>{post.title}</a>
+              </h2>
+              <p class="blog-card-excerpt">{post.excerpt}</p>
+              <a href={`/blog/${post.slug}`} class="text-link">Read more →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .blog-header {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+  }
+
+  .blog-header .container {
+    padding: var(--spacing-md);
+  }
+
+  .blog-content .container {
+    padding: var(--spacing-md);
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .blog-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--color-border);
+  }
+
+  .blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .blog-card-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease;
+  }
+
+  .blog-card:hover .blog-card-image {
+    transform: scale(1.05);
+  }
+
+  .blog-card-content {
+    padding: var(--spacing-sm);
+  }
+
+  .blog-card-date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .blog-card-title {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .blog-card-title a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .blog-card-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .blog-card-excerpt {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.5;
+  }
+
+  .text-link {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .text-link:hover {
+    color: var(--color-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

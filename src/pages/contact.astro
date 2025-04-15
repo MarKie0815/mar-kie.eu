@@ -1,0 +1,217 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Mar-Kie | Contact" description="Get in touch with the Mar-Kie team">
+  <section class="contact-header content-section">
+    <div class="container glass-panel">
+      <h1 class="section-title">Contact Us</h1>
+      <p class="section-subtitle">We'd love to hear from you</p>
+    </div>
+  </section>
+
+  <section class="contact-content content-section">
+    <div class="container glass-panel">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Get in Touch</h2>
+          <p>Have a question, suggestion, or just want to say hello? We'd love to hear from you! Fill out the form and we'll get back to you as soon as possible.</p>
+          
+          <div class="contact-methods">
+            <div class="contact-method">
+              <h3>Email</h3>
+              <p><a href="mailto:info@mar-kie.eu">info@mar-kie.eu</a></p>
+            </div>
+            
+            <div class="contact-method">
+              <h3>Follow Us</h3>
+              <div class="social-links">
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">LinkedIn</a>
+                <a href="#" class="social-link">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form-container">
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required />
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit" class="button primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .contact-header {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+  }
+
+  .contact-header .container,
+  .contact-content .container {
+    padding: var(--spacing-md);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: start;
+  }
+
+  .contact-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-md);
+    color: white;
+  }
+
+  .contact-info p {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .contact-methods {
+    margin-top: var(--spacing-lg);
+  }
+
+  .contact-method {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .contact-method h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-xs);
+    color: white;
+  }
+
+  .contact-method p a {
+    color: var(--color-primary);
+  }
+
+  .social-links {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .social-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .social-link:hover {
+    color: var(--color-secondary);
+  }
+
+  .contact-form-container {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+  }
+
+  .form-group {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    color: white;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+  }
+
+  .button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .button.primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .button.primary:hover {
+    background-color: #2a75e8;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+      margin-bottom: var(--spacing-md);
+    }
+  }
+</style>
+
+<script>
+  // Handle contact form submission
+  document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contact-form');
+    
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // In a real implementation, you would send the form data to a server
+        // For now, we'll just show an alert
+        alert('Thank you for your message! We will get back to you soon.');
+        contactForm.reset();
+      });
+    }
+  });
+</script>

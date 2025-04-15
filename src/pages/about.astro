@@ -1,0 +1,206 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Mar-Kie | About" description="Learn more about Mar-Kie">
+  <section class="about-header content-section">
+    <div class="container glass-panel">
+      <h1 class="section-title">About Mar-Kie</h1>
+      <p class="section-subtitle">Our story, mission, and vision</p>
+    </div>
+  </section>
+
+  <section class="about-content content-section">
+    <div class="container glass-panel">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Our Story</h2>
+          <p>Mar-Kie began as a personal blog in 2015, sharing insights and experiences about web development, design, and technology. Over the years, we've grown into a platform that provides valuable resources and information to our community.</p>
+          
+          <p>In 2023, we decided to completely redesign our website, moving away from WordPress to a modern, high-performance solution built with Astro. This transition allowed us to create a faster, more engaging experience for our visitors while maintaining the distinctive section-based layout that has become our signature style.</p>
+          
+          <h2>Our Mission</h2>
+          <p>At Mar-Kie, our mission is to share knowledge, inspire creativity, and foster a community of like-minded individuals passionate about web development and design. We believe in the power of technology to transform lives and businesses, and we're committed to making that knowledge accessible to everyone.</p>
+          
+          <h2>Our Approach</h2>
+          <p>We take a holistic approach to web development, focusing on:</p>
+          
+          <ul>
+            <li><strong>Performance:</strong> Creating fast, responsive websites that provide an excellent user experience.</li>
+            <li><strong>Accessibility:</strong> Ensuring our content is accessible to everyone, regardless of ability or device.</li>
+            <li><strong>Sustainability:</strong> Building websites that are environmentally friendly and sustainable.</li>
+            <li><strong>Innovation:</strong> Staying at the forefront of web development trends and technologies.</li>
+          </ul>
+        </div>
+        
+        <div class="about-image">
+          <img src="https://via.placeholder.com/600x800" alt="About Mar-Kie" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section content-section">
+    <div class="container glass-panel">
+      <h2 class="section-title">Our Team</h2>
+      <p class="section-subtitle">The people behind Mar-Kie</p>
+      
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="team-member-image">
+            <img src="https://via.placeholder.com/300x300" alt="Team Member" />
+          </div>
+          <h3 class="team-member-name">Jane Doe</h3>
+          <p class="team-member-role">Founder & Lead Developer</p>
+          <p class="team-member-bio">Jane has over 10 years of experience in web development and design. She founded Mar-Kie in 2015 with a vision to share her knowledge and help others build better websites.</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="team-member-image">
+            <img src="https://via.placeholder.com/300x300" alt="Team Member" />
+          </div>
+          <h3 class="team-member-name">John Smith</h3>
+          <p class="team-member-role">Content Strategist</p>
+          <p class="team-member-bio">John is responsible for our content strategy and editorial calendar. He ensures that our blog posts are informative, engaging, and valuable to our readers.</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="team-member-image">
+            <img src="https://via.placeholder.com/300x300" alt="Team Member" />
+          </div>
+          <h3 class="team-member-name">Emily Johnson</h3>
+          <p class="team-member-role">UX Designer</p>
+          <p class="team-member-bio">Emily is our UX designer, focused on creating intuitive and delightful user experiences. She's passionate about accessibility and inclusive design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .about-header {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+  }
+
+  .about-header .container,
+  .about-content .container,
+  .team-section .container {
+    padding: var(--spacing-md);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: start;
+  }
+
+  .about-text h2 {
+    font-size: 1.8rem;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    color: white;
+  }
+
+  .about-text p {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .about-text ul {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-md);
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .about-text li {
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.8;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .team-section {
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+    margin-top: var(--spacing-lg);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+
+  .team-member {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding-bottom: var(--spacing-sm);
+    border: 1px solid var(--color-border);
+  }
+
+  .team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .team-member-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .team-member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .team-member:hover .team-member-image img {
+    transform: scale(1.05);
+  }
+
+  .team-member-name {
+    font-size: 1.25rem;
+    margin: var(--spacing-sm) 0 var(--spacing-xs);
+    padding: 0 var(--spacing-sm);
+    color: white;
+  }
+
+  .team-member-role {
+    color: var(--color-primary);
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+    padding: 0 var(--spacing-sm);
+  }
+
+  .team-member-bio {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    padding: 0 var(--spacing-sm);
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image {
+      order: -1;
+      margin-bottom: var(--spacing-md);
+    }
+  }
+</style>

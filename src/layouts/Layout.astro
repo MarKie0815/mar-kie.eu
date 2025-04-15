@@ -1,0 +1,580 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "A modern, WordPress-free website" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class="animated-background">
+			<div class="gradient-sphere sphere-1"></div>
+			<div class="gradient-sphere sphere-2"></div>
+			<div class="gradient-sphere sphere-3"></div>
+		</div>
+		<div class="noise-overlay"></div>
+		
+		<header class="site-header">
+			<div class="container glass-panel">
+				<div class="logo">
+					<a href="/">Mar-Kie</a>
+				</div>
+				<nav class="main-nav">
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/blog">Blog</a></li>
+						<li><a href="/about">About</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+				</nav>
+				<button class="mobile-menu-toggle" aria-label="Toggle menu">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
+			</div>
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer class="site-footer">
+			<div class="container glass-panel">
+				<div class="footer-content">
+					<div class="footer-logo">
+						<a href="/">Mar-Kie</a>
+					</div>
+					<div class="footer-links">
+						<h3>Navigation</h3>
+						<ul>
+							<li><a href="/">Home</a></li>
+							<li><a href="/blog">Blog</a></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/contact">Contact</a></li>
+						</ul>
+					</div>
+					<div class="footer-contact">
+						<h3>Contact</h3>
+						<p>Email: info@mar-kie.eu</p>
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<p>&copy; {new Date().getFullYear()} Mar-Kie. All rights reserved.</p>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<script>
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	// Register ScrollTrigger plugin
+	gsap.registerPlugin(ScrollTrigger);
+
+	// Mobile menu toggle
+	const menuToggle = document.querySelector('.mobile-menu-toggle');
+	const mainNav = document.querySelector('.main-nav');
+
+	if (menuToggle && mainNav) {
+		menuToggle.addEventListener('click', () => {
+			menuToggle.classList.toggle('active');
+			mainNav.classList.toggle('active');
+		});
+	}
+
+	// Initialize scroll animations
+	document.addEventListener('DOMContentLoaded', () => {
+		// Animate sections as they come into view
+		const sections = document.querySelectorAll('.content-section');
+		
+		sections.forEach(section => {
+			gsap.fromTo(
+				section,
+				{ y: 100, opacity: 0 },
+				{
+					y: 0,
+					opacity: 1,
+					duration: 0.8,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: section,
+						start: 'top 80%',
+						toggleActions: 'play none none none'
+					}
+				}
+			);
+		});
+
+		// Animate background spheres
+		const spheres = document.querySelectorAll('.gradient-sphere');
+		
+		spheres.forEach((sphere, index) => {
+			const duration = 20 + index * 5;
+			const delay = index * 2;
+			
+			gsap.to(sphere, {
+				x: "random(-20, 20, 5)%",
+				y: "random(-20, 20, 5)%",
+				scale: "random(0.8, 1.2, 0.1)",
+				duration: duration,
+				delay: delay,
+				ease: "sine.inOut",
+				repeat: -1,
+				yoyo: true
+			});
+		});
+	});
+</script>
+
+<style is:global>
+	:root {
+		--color-primary: #3a86ff;
+		--color-secondary: #ff006e;
+		--color-text: #333333;
+		--color-text-light: #666666;
+		--color-background: #0a0a0a;
+		--color-background-alt: rgba(20, 20, 20, 0.5);
+		--color-border: rgba(255, 255, 255, 0.1);
+		
+		--font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		
+		--spacing-xs: 0.5rem;
+		--spacing-sm: 1rem;
+		--spacing-md: 2rem;
+		--spacing-lg: 4rem;
+		--spacing-xl: 8rem;
+		
+		--container-width: 1200px;
+		--container-padding: 2rem;
+		
+		--glass-background: rgba(20, 20, 20, 0.7);
+		--glass-border: rgba(255, 255, 255, 0.1);
+		--glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+		--glass-blur: 10px;
+	}
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	html {
+		font-family: var(--font-family);
+		color: #ffffff;
+		background-color: var(--color-background);
+		scroll-behavior: smooth;
+	}
+
+	body {
+		line-height: 1.6;
+		overflow-x: hidden;
+		position: relative;
+	}
+
+	a {
+		color: var(--color-primary);
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	a:hover {
+		color: var(--color-secondary);
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.container {
+		width: 100%;
+		max-width: var(--container-width);
+		margin: 0 auto;
+		padding: 0 var(--container-padding);
+	}
+
+	/* Animated background */
+	.animated-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -2;
+		overflow: hidden;
+		background-color: var(--color-background);
+	}
+
+	.gradient-sphere {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(60px);
+	}
+
+	.sphere-1 {
+		width: 50vw;
+		height: 50vw;
+		background: radial-gradient(circle, rgba(58, 134, 255, 0.3) 0%, rgba(58, 134, 255, 0) 70%);
+		top: 10%;
+		left: 10%;
+	}
+
+	.sphere-2 {
+		width: 60vw;
+		height: 60vw;
+		background: radial-gradient(circle, rgba(255, 0, 110, 0.2) 0%, rgba(255, 0, 110, 0) 70%);
+		bottom: 10%;
+		right: 10%;
+	}
+
+	.sphere-3 {
+		width: 40vw;
+		height: 40vw;
+		background: radial-gradient(circle, rgba(111, 66, 193, 0.2) 0%, rgba(111, 66, 193, 0) 70%);
+		top: 40%;
+		right: 30%;
+	}
+
+	.noise-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		opacity: 0.05;
+		background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=');
+	}
+
+	/* Glass panel effect */
+	.glass-panel {
+		background: var(--glass-background);
+		backdrop-filter: blur(var(--glass-blur));
+		-webkit-backdrop-filter: blur(var(--glass-blur));
+		border: 1px solid var(--glass-border);
+		border-radius: 10px;
+		box-shadow: var(--glass-shadow);
+	}
+
+	/* Header styles */
+	.site-header {
+		position: fixed;
+		top: 20px;
+		left: 0;
+		width: 100%;
+		z-index: 1000;
+		padding: 0;
+	}
+
+	.site-header .container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem 2rem;
+	}
+
+	.logo a {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: #ffffff;
+	}
+
+	.main-nav ul {
+		display: flex;
+		list-style: none;
+		gap: 2rem;
+	}
+
+	.main-nav a {
+		color: #ffffff;
+		font-weight: 500;
+	}
+
+	.main-nav a:hover {
+		color: var(--color-primary);
+	}
+
+	.mobile-menu-toggle {
+		display: none;
+		background: none;
+		border: none;
+		cursor: pointer;
+		width: 30px;
+		height: 24px;
+		position: relative;
+	}
+
+	.mobile-menu-toggle span {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: #ffffff;
+		position: absolute;
+		left: 0;
+		transition: all 0.3s ease;
+	}
+
+	.mobile-menu-toggle span:nth-child(1) {
+		top: 0;
+	}
+
+	.mobile-menu-toggle span:nth-child(2) {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.mobile-menu-toggle span:nth-child(3) {
+		bottom: 0;
+	}
+
+	.mobile-menu-toggle.active span:nth-child(1) {
+		transform: rotate(45deg);
+		top: 11px;
+	}
+
+	.mobile-menu-toggle.active span:nth-child(2) {
+		opacity: 0;
+	}
+
+	.mobile-menu-toggle.active span:nth-child(3) {
+		transform: rotate(-45deg);
+		bottom: 11px;
+	}
+
+	/* Main content styles */
+	main {
+		margin-top: 100px;
+		min-height: calc(100vh - 100px - 300px);
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Section styles */
+	.content-section {
+		padding: var(--spacing-lg) 0;
+		opacity: 0; /* Start invisible for animation */
+	}
+
+	.section-title {
+		font-size: 2.5rem;
+		margin-bottom: var(--spacing-md);
+		font-weight: 700;
+		color: #ffffff;
+	}
+
+	.section-subtitle {
+		font-size: 1.25rem;
+		color: rgba(255, 255, 255, 0.7);
+		margin-bottom: var(--spacing-md);
+	}
+
+	/* Footer styles */
+	.site-footer {
+		padding: var(--spacing-lg) 0;
+		margin-top: var(--spacing-lg);
+		position: relative;
+		z-index: 1;
+	}
+
+	.site-footer .container {
+		padding: var(--spacing-md);
+	}
+
+	.footer-content {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: var(--spacing-md);
+		margin-bottom: var(--spacing-md);
+	}
+
+	.footer-logo a {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: #ffffff;
+	}
+
+	.footer-links h3,
+	.footer-contact h3 {
+		font-size: 1.25rem;
+		margin-bottom: var(--spacing-sm);
+		color: #ffffff;
+	}
+
+	.footer-links ul {
+		list-style: none;
+	}
+
+	.footer-links li {
+		margin-bottom: 0.5rem;
+	}
+
+	.footer-links a {
+		color: rgba(255, 255, 255, 0.7);
+	}
+
+	.footer-links a:hover {
+		color: var(--color-primary);
+	}
+
+	.footer-bottom {
+		border-top: 1px solid var(--color-border);
+		padding-top: var(--spacing-md);
+		text-align: center;
+		color: rgba(255, 255, 255, 0.5);
+	}
+
+	/* Blog styles */
+	.blog-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--spacing-md);
+	}
+
+	.blog-card {
+		border-radius: 8px;
+		overflow: hidden;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		background: var(--glass-background);
+		backdrop-filter: blur(var(--glass-blur));
+		-webkit-backdrop-filter: blur(var(--glass-blur));
+		border: 1px solid var(--glass-border);
+		box-shadow: var(--glass-shadow);
+	}
+
+	.blog-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+	}
+
+	.blog-card-image {
+		height: 200px;
+		background-color: rgba(0, 0, 0, 0.2);
+		background-size: cover;
+		background-position: center;
+	}
+
+	.blog-card-content {
+		padding: var(--spacing-sm);
+	}
+
+	.blog-card-title {
+		font-size: 1.25rem;
+		margin-bottom: var(--spacing-xs);
+		color: #ffffff;
+	}
+
+	.blog-card-date {
+		color: rgba(255, 255, 255, 0.5);
+		font-size: 0.875rem;
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.blog-card-excerpt {
+		color: rgba(255, 255, 255, 0.7);
+		margin-bottom: var(--spacing-sm);
+	}
+
+	/* Single blog post */
+	.blog-post {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.blog-post-header {
+		margin-bottom: var(--spacing-md);
+	}
+
+	.blog-post-title {
+		font-size: 2.5rem;
+		margin-bottom: var(--spacing-xs);
+		color: #ffffff;
+	}
+
+	.blog-post-meta {
+		color: rgba(255, 255, 255, 0.5);
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.blog-post-content {
+		line-height: 1.8;
+		color: rgba(255, 255, 255, 0.9);
+	}
+
+	.blog-post-content p,
+	.blog-post-content ul,
+	.blog-post-content ol {
+		margin-bottom: var(--spacing-md);
+	}
+
+	.blog-post-content h2,
+	.blog-post-content h3 {
+		margin: var(--spacing-md) 0 var(--spacing-sm);
+		color: #ffffff;
+	}
+
+	.blog-post-content img {
+		border-radius: 8px;
+		margin: var(--spacing-md) 0;
+	}
+
+	/* Responsive styles */
+	@media (max-width: 768px) {
+		.mobile-menu-toggle {
+			display: block;
+		}
+
+		.main-nav {
+			position: fixed;
+			top: 90px;
+			left: 20px;
+			right: 20px;
+			background: var(--glass-background);
+			backdrop-filter: blur(var(--glass-blur));
+			-webkit-backdrop-filter: blur(var(--glass-blur));
+			border: 1px solid var(--glass-border);
+			border-radius: 10px;
+			box-shadow: var(--glass-shadow);
+			padding: 1rem;
+			transform: translateY(-100%);
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.3s ease;
+		}
+
+		.main-nav.active {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.main-nav ul {
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		.section-title {
+			font-size: 2rem;
+		}
+
+		.content-section {
+			padding: var(--spacing-md) 0;
+		}
+	}
+</style>

@@ -1,0 +1,300 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// In a real implementation, you would fetch blog posts from your content collection
+// For now, we'll use dummy data
+const posts = {
+  'getting-started-with-astro': {
+    title: 'Getting Started with Astro',
+    date: 'June 15, 2023',
+    author: 'Mar-Kie Team',
+    image: 'https://via.placeholder.com/1200x600',
+    content: `
+      <p>In this post, we'll explore how we migrated from WordPress to Astro for better performance and developer experience.</p>
+      
+      <h2>Why We Chose Astro</h2>
+      <p>After years of using WordPress, we decided it was time for a change. We wanted a modern, fast, and flexible solution that would allow us to build a high-performance website without the overhead of a traditional CMS.</p>
+      
+      <p>Astro offered the perfect balance of features for our needs:</p>
+      <ul>
+        <li>Excellent performance with its "zero JS by default" approach</li>
+        <li>Flexibility to use any UI framework (React, Vue, Svelte, etc.)</li>
+        <li>Built-in support for Markdown content</li>
+        <li>Simple and intuitive API</li>
+        <li>Great developer experience</li>
+      </ul>
+      
+      <h2>The Migration Process</h2>
+      <p>Migrating from WordPress to Astro involved several steps:</p>
+      
+      <h3>1. Exporting Content from WordPress</h3>
+      <p>We used the WordPress REST API to export all our posts and pages as JSON. This gave us a clean data source to work with.</p>
+      
+      <h3>2. Setting Up the Astro Project</h3>
+      <p>We created a new Astro project and set up the basic structure, including layouts, components, and styles.</p>
+      
+      <h3>3. Converting Content to Markdown</h3>
+      <p>We converted our WordPress content to Markdown files, which Astro can process natively. This involved parsing the HTML content and transforming it into Markdown syntax.</p>
+      
+      <h3>4. Recreating Templates and Components</h3>
+      <p>We recreated our WordPress templates and components in Astro, taking advantage of Astro's component-based architecture.</p>
+      
+      <h3>5. Setting Up Deployment</h3>
+      <p>Finally, we set up a deployment pipeline to build and deploy our Astro site to a modern hosting platform.</p>
+      
+      <h2>The Results</h2>
+      <p>The results of our migration have been impressive:</p>
+      
+      <ul>
+        <li>Page load times decreased by over 70%</li>
+        <li>Lighthouse scores improved significantly</li>
+        <li>Development workflow is much smoother</li>
+        <li>Content management is simpler and more developer-friendly</li>
+      </ul>
+      
+      <h2>Conclusion</h2>
+      <p>Moving from WordPress to Astro has been a game-changer for our website. We've gained performance, flexibility, and a better development experience. If you're considering a similar move, we highly recommend giving Astro a try.</p>
+    `
+  },
+  'modern-web-development': {
+    title: 'Modern Web Development Techniques',
+    date: 'May 28, 2023',
+    author: 'Mar-Kie Team',
+    image: 'https://via.placeholder.com/1200x600',
+    content: `
+      <p>In this article, we'll explore some of the latest techniques and best practices in modern web development.</p>
+      
+      <h2>The Evolution of Web Development</h2>
+      <p>Web development has come a long way since the early days of static HTML pages. Today's web applications are complex, interactive, and often rival native applications in terms of functionality and user experience.</p>
+      
+      <h2>Key Modern Web Development Techniques</h2>
+      
+      <h3>1. Static Site Generation (SSG)</h3>
+      <p>Static site generators like Astro, Next.js, and Gatsby have revolutionized how we build websites. They combine the benefits of static sites (speed, security, scalability) with the development experience of modern frameworks.</p>
+      
+      <h3>2. Jamstack Architecture</h3>
+      <p>The Jamstack approach (JavaScript, APIs, and Markup) decouples the frontend from the backend, allowing for more flexible, secure, and performant web applications.</p>
+      
+      <h3>3. CSS-in-JS and Utility-First CSS</h3>
+      <p>Modern approaches to CSS, such as CSS-in-JS libraries and utility-first frameworks like Tailwind CSS, have changed how developers style their applications, offering more maintainable and scalable solutions.</p>
+      
+      <h3>4. Web Components</h3>
+      <p>Web Components provide a standard way to create reusable custom elements with encapsulated functionality, making it easier to build modular and maintainable user interfaces.</p>
+      
+      <h3>5. Serverless Functions</h3>
+      <p>Serverless functions allow developers to run backend code without managing servers, making it easier to build and scale backend functionality.</p>
+      
+      <h2>Best Practices for Modern Web Development</h2>
+      
+      <ul>
+        <li><strong>Performance First:</strong> Prioritize performance in all aspects of your application.</li>
+        <li><strong>Progressive Enhancement:</strong> Ensure your site works for all users, regardless of their device or browser capabilities.</li>
+        <li><strong>Accessibility:</strong> Make your site accessible to all users, including those with disabilities.</li>
+        <li><strong>Security:</strong> Implement security best practices to protect your users and your data.</li>
+        <li><strong>Testing:</strong> Test your application thoroughly to ensure it works as expected.</li>
+      </ul>
+      
+      <h2>Conclusion</h2>
+      <p>Modern web development offers a wealth of tools, techniques, and best practices to build better, faster, and more user-friendly web applications. By staying up-to-date with these developments, you can create web experiences that delight your users and stand the test of time.</p>
+    `
+  },
+  'future-of-content-management': {
+    title: 'The Future of Content Management',
+    date: 'April 10, 2023',
+    author: 'Mar-Kie Team',
+    image: 'https://via.placeholder.com/1200x600',
+    content: `
+      <p>In this post, we'll explore how headless CMS and static site generators are changing the landscape of content management.</p>
+      
+      <h2>The Traditional CMS Approach</h2>
+      <p>For many years, content management systems like WordPress, Drupal, and Joomla have dominated the web. These monolithic systems handle everything from content storage and management to rendering the frontend of websites.</p>
+      
+      <p>While this approach has worked well for many use cases, it comes with several limitations:</p>
+      
+      <ul>
+        <li>Performance issues due to server-side rendering</li>
+        <li>Security vulnerabilities from large, complex codebases</li>
+        <li>Limited flexibility for developers</li>
+        <li>Difficulty scaling for high-traffic sites</li>
+      </ul>
+      
+      <h2>The Rise of Headless CMS</h2>
+      <p>Headless CMS platforms separate the content management backend from the frontend presentation layer. Content is stored and managed in the CMS but is delivered via APIs, allowing developers to build the frontend using any technology they choose.</p>
+      
+      <p>This decoupling offers several advantages:</p>
+      
+      <ul>
+        <li>Greater flexibility in frontend development</li>
+        <li>Improved performance through static site generation</li>
+        <li>Better security by reducing the attack surface</li>
+        <li>Easier scaling for high-traffic sites</li>
+        <li>Support for omnichannel content delivery</li>
+      </ul>
+      
+      <h2>Static Site Generators: The Perfect Companion</h2>
+      <p>Static site generators (SSGs) like Astro, Next.js, and Gatsby work perfectly with headless CMS platforms. They fetch content from the CMS at build time and generate static HTML files that can be served from a CDN, resulting in extremely fast websites.</p>
+      
+      <h2>The Future of Content Management</h2>
+      <p>Looking ahead, we see several trends shaping the future of content management:</p>
+      
+      <h3>1. API-First Content Management</h3>
+      <p>Content will increasingly be managed through APIs, allowing for greater flexibility in how and where it's displayed.</p>
+      
+      <h3>2. Composable Architecture</h3>
+      <p>Rather than all-in-one solutions, businesses will assemble their content management stack from best-of-breed components.</p>
+      
+      <h3>3. AI-Assisted Content Creation</h3>
+      <p>AI tools will play a growing role in content creation, helping to generate, optimize, and personalize content.</p>
+      
+      <h3>4. Edge Computing for Content Delivery</h3>
+      <p>Content will be delivered from edge servers located closer to users, further improving performance.</p>
+      
+      <h2>Conclusion</h2>
+      <p>The future of content management is headless, API-driven, and built on a composable architecture. By embracing these trends, businesses can create faster, more flexible, and more scalable content experiences for their users.</p>
+    `
+  }
+};
+
+export function getStaticPaths() {
+  return Object.keys(posts).map(slug => ({
+    params: { slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const post = posts[slug];
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout title={`Mar-Kie | ${post.title}`} description={post.title}>
+  <article class="blog-post content-section">
+    <div class="container glass-panel">
+      <header class="blog-post-header">
+        <h1 class="blog-post-title">{post.title}</h1>
+        <div class="blog-post-meta">
+          <span class="blog-post-date">{post.date}</span>
+          <span class="blog-post-author">by {post.author}</span>
+        </div>
+        <div class="blog-post-image">
+          <img src={post.image} alt={post.title} />
+        </div>
+      </header>
+      
+      <div class="blog-post-content" set:html={post.content}></div>
+      
+      <div class="blog-post-navigation">
+        <a href="/blog" class="button secondary">← Back to Blog</a>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: var(--spacing-lg);
+  }
+
+  .blog-post .container {
+    padding: var(--spacing-md);
+  }
+
+  .blog-post-header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .blog-post-title {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xs);
+    color: white;
+  }
+
+  .blog-post-meta {
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.9rem;
+  }
+
+  .blog-post-author {
+    margin-left: var(--spacing-xs);
+  }
+
+  .blog-post-image {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .blog-post-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .blog-post-content {
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .blog-post-content h2 {
+    font-size: 1.8rem;
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+    color: white;
+  }
+
+  .blog-post-content h3 {
+    font-size: 1.4rem;
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+    color: white;
+  }
+
+  .blog-post-content p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .blog-post-content ul, 
+  .blog-post-content ol {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-md);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .blog-post-content li {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .blog-post-navigation {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .button.secondary {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .button.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .blog-post-title {
+      font-size: 2rem;
+    }
+  }
+</style>
